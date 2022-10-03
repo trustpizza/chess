@@ -1,4 +1,6 @@
 require_relative "./misc/misc.rb"
+#require_relative "./pieces/pawn.rb"
+require 'pry-byebug'
 
 class Board
   include Miscellaneous
@@ -23,6 +25,37 @@ class Board
     puts "  a b c d e f g h"
   end
     
+  def letter_location(location)
+    location = location.split(' ')
+    location[0] 
+  end
+
+  def letter_mapping(letter)
+    letters = { 'a'=>1, 'b'=>2, 'c'=>3, 'd'=>4, 'e'=>5, 'f'=>6, 'g'=>7, 'h'=>8 }
+    letters[letter]
+  end
+
+  def number_location(location)
+    location = location.split(' ')
+    location[1]
+  end
+
+
+  def place_piece(piece, location)
+    location_letter = location_letter(location)
+    location_number = location_number(location)
+
+    grid[location_letter][location_number] = piece.symbol #Idea here is to place the piece's symbol to that spot in the grid THEN...
+    update_location(piece, location) #Update the piece's location
+  end
+
+  def update_location(piece, location)
+    location_letter = location_letter(location)
+    location_number = location_number(location)
+
+    piece.location = grid[location_letter][location_number] #Update the piece's location
+  end
+
 end
 
 board = Board.new
