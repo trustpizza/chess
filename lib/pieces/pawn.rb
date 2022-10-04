@@ -1,30 +1,22 @@
 
-require 'pry-byebug'
 class Pawn
-  attr_reader :symbol, :placement
+  attr_reader :children, :parent, :location
 
-  MOVES = [1,0]
-  def initialize(location)
-    @symbol = "\u2659" #White pawn
-    @placement = location
+  def initialize(location, parent = nil)
+    @location = location
+    @children = []
+    @parent = parent
   end
 
   def next_moves(out = [])
     moves = [[1,0]]
 
     moves.map do |move|
-      x = @placement[0] + move[0]
-      y = @placement[1] + move[1]
-      
-      out << [x,y] if x.between?(0,7) && y.between?(0,7)
+      x = @location[0] + move[0]
+      y = @location[1] + move[1]
+
+      out << [x, y] if x.between?(0, 7) && y.between?(0, 7)
     end
-
     out
-  end
-
-
-
-  def update_placement(location)
-    @placement = location
   end
 end
