@@ -4,10 +4,11 @@ require 'pry-byebug'
 
 class Board
   include Miscellaneous
-  attr_accessor :grid
+  attr_accessor :grid, :pieces
   
   def initialize
     @grid = Array.new(8) {Array.new(8, nil) }
+    @pieces = []
   end
 
   def display_board
@@ -37,23 +38,41 @@ class Board
     location_number = number_location(location)
 
     @grid[location_number][location_letter] = piece.symbol #Idea here is to place the piece's symbol to that spot in the grid THEN...
-    update_location(piece, location) #Update the piece's location
   end
 
-  def update_location(piece, location)
-    location_letter = letter_location(location)
-    location_number = number_location(location)
-
-    piece.update_placement(location) #Update the piece's location
+  def clear_board
+    @grid.each do |row|
+      0.upto(7) do |tile|
+        row[tile] = nil
+      end
+    end
   end
 
+  def update_grid 
+    clear_board #first clear the board
+
+    # Then Update the board based upon the saved locations of the piece
+    @pieces.each do |piece|
+      place_piece(piece, piece.placement)
+    end
+  end
+
+  def select_piece(location)
+    @pieces.each do |piece|
+      return piece if piece.placement == location
+    end
+    false 
+  end
 end
 
 board = Board.new
 board.display_board  
 pawn = Pawn.new('a1')
-binding.pry
+pawn2 = Pawn.new('e5')
 
-board.place_piece(pawn, pawn.placement)
+board.pieces << pawn
+board.pieces << pawn2
+
+binding.pry
 
 puts 'hi'
