@@ -7,4 +7,5 @@ module Miscellaneous
   def black_square
     "\u2B1B"
   end
+ 
 end
