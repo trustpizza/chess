@@ -28,6 +28,3 @@ class Pawn
     @placement = location
   end
 end
-
-binding.pry
-pawn = Pawn.new
