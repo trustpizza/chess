@@ -32,21 +32,21 @@ class Board
   end
 
   def letter_location(location)
-    location = location.split(' ')
-    location[0] .to_i
+    location = location.split('')
+    letter_mapping(location[0])
   end
 
   def number_location(location)
-    location = location.split(' ')
-    location[1].to_i + 1
+    location = location.split('')
+    location[1].to_i
   end
 
 
   def place_piece(piece, location)
     location_letter = letter_location(location)
     location_number = number_location(location)
-
-    @grid[location_letter][location_number] = piece.symbol #Idea here is to place the piece's symbol to that spot in the grid THEN...
+    binding.pry
+    @grid[location_number][location_letter] = piece.symbol #Idea here is to place the piece's symbol to that spot in the grid THEN...
     update_location(piece, location) #Update the piece's location
   end
 
@@ -61,9 +61,9 @@ end
 
 board = Board.new
 board.display_board  
-pawn = Pawn.new('A1')
+pawn = Pawn.new('a1')
+#binding.pry
 
 board.place_piece(pawn, pawn.placement)
 
-binding.pry
 puts 'hi'
