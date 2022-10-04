@@ -8,6 +8,10 @@ class Pawn
     @parent = parent
   end
 
+  def set_location(location)
+    @location = location
+  end
+
   def next_moves(out = [])
     moves = [[1,0]]
 

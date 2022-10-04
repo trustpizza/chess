@@ -1,4 +1,5 @@
 require_relative 'pieces/knight.rb'
+require_relative 'pieces/pawn.rb'
 require 'pry-byebug'
 
 class Board
@@ -12,11 +13,19 @@ class Board
   def allowed_moves(piece)
     allowed_moves = piece.next_moves
   end
-end
 
+  def move_piece(piece, location)
+    allowed_moves = allowed_moves(piece)
+
+    piece.set_location(location) if allowed_moves.include?(location)
+  end
+
+end
 
 game = Board.new
 binding.pry
-game.piece_moves([3,3])
+game.pieces
+
+
 
   

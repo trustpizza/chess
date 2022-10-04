@@ -1,13 +1,15 @@
 
-
 class Knight
-    attr_reader :location
-    attr_accessor :children, :parent
+    attr_accessor :children, :parent, :location
   
     def initialize(location, parent = nil)
       @location = location
       @children = []
       @parent = parent
+    end
+
+    def set_location(location)
+        @location = location
     end
   
     def next_moves(out = [])
