@@ -1,6 +1,6 @@
 
 class Pawn
-  attr_reader :children, :parent, :location
+  attr_accessor :children, :parent, :location
 
   def initialize(location, parent = nil)
     @location = location
