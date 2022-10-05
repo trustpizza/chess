@@ -41,8 +41,11 @@ class Board
       if @board[location[0]][location[1]].nil?
         piece.set_location(location) if allowed_moves.include?(location)
       end
-    elsif piece.is_a?(Rook) || piece.is_a?(Bishop)
+    elsif piece.is_a?(Rook)# || piece.is_a?(Bishop)
       start = piece.location
+      #Subtract the Start from the Destination, Only Map Moves using THAT!
+      #also make these separate functions, it's getting clunky
+      
       piece.set_location(location) if moves_tree(piece, start, location)
     end
 
@@ -75,6 +78,7 @@ pawn = Pawn.new([1,0])
 king = King.new([1,1])
 bishop = Bishop.new([3,3])
 rook = Rook.new([5,5])
+rook.next_moves
 binding.pry
 game.move_piece(pawn, [2,0])
 
