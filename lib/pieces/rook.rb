@@ -20,6 +20,6 @@ class Rook
 
         out << [x, y] if x.between?(0, 7) && y.between?(0, 7)
         end
-        out
+        out     
     end
 end

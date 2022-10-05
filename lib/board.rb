@@ -68,7 +68,6 @@ class Board
   def place_piece(piece)
     @board[piece.location[0]][piece.location[1]] = piece
   end
-
 end
 
 game = Board.new
