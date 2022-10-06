@@ -1,26 +1,20 @@
-class Rook  
-    attr_accessor :children, :parent, :location, :direction
+require_relative "piece.rb"
 
-    def initialize(location, parent = nil)
-        @location = location
-        @children = []
-        @parent = parent
-        @direction = nil
+
+class Rook < Piece
+    attr_accessor :location
+
+    def initialize(location, board)
+        super(location, board)
     end
 
-    def set_location(location)
-        @location = location
-    end
-
-    def next_moves(out = [])
-        moves = [[0,-1],[0,1], [1,0],[-1,0]] #Left, Right, Up, Down
-
-        moves.map do |move|
-            x = @location[0] + move[0]
-            y = @location[1] + move[1]
-
-            out << [x, y] if x.between?(0, 7) && y.between?(0, 7)
-        end
-        out     
+    def move_set
+        [[0,1],[1,0],[-1,0],[0,-1]]
     end
 end
+board = Board.new
+
+
+rook = Rook.new([3,3], board)
+rook.find_possible_moves(board)
+x
