@@ -1,4 +1,5 @@
 require_relative "piece.rb"
+require_relative "../board.rb"
 
 
 class Rook < Piece
@@ -12,3 +13,8 @@ class Rook < Piece
         [[0,1],[1,0],[-1,0],[0,-1]]
     end
 end
+board = Board.new
+rook = Rook.new([5,5], board)
+moves = rook.possible_moves(board)
+
+rook.invalid_moves(moves, board)
