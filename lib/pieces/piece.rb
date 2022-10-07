@@ -13,26 +13,20 @@ class Piece
         @location = [rank, file]
     end
 
-
-
     def possible_moves(board)
         moves = move_set.reduce([]) do |out, move|
             out << make_moves(board.grid, move[0], move[1]) #Function that takes the board, takes move[0] and move[1] to determine available moves
         end
         moves.compact.flatten(1)   
-        binding.pry
     end
 
     def invalid_moves(board, possible_moves)
         
-        #To Check for invalid moves
-        # Search the board at every possible move for a piece
-        # If there is a piece there, and it is not valid (not yet worrying about color, checkmate, etc.)
-        # If there is a piece there all further moves along that branch are ALSO invalid
-
-        # Create an output arr called out
-        # Take the possible moves array and go through each of the [rank, file] pairings
-        # If any of the values 
+        # Take the possible moves and split them into two arrays, Arrays with the same Rank and Arrays with the same file (later add diagonals)
+        # For the Rank array, check the board for each spot that exists in that array
+            # If all are nil, return that array
+            # If any is full, split the array at that point and return ONLY the closer array (even if nil)
+        # 
     end
     private
 
