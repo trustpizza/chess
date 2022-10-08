@@ -27,10 +27,10 @@ class Piece
         right_diag = right_diag(possible_moves)
 
         right_row = second_half(row)
-        left_row = first_half(row)
+        left_row = first_half(row).reverse
         
-        down_col = first_half(col)
-        up_col = second_half(col)
+        up_col = first_half(col).reverse
+        down_col = second_half(col)
 
         #These methods create their respective groupings of moves.  Be sure to uniq! the final product to get rid of any duplicates since they do technically include non diagonal movements ;)
         upper_left_diag = first_half(left_diag)
@@ -38,14 +38,17 @@ class Piece
 
         upper_right_diag = first_half(right_diag)
         lower_left_diag = second_half(left_diag)
+        
+        #Now that I have every combination of possible movements, I can search them and splice them again at the place where they meet their first non-nil place.
+        #Then take all of those and return them into a single array
+        # Collapse all of those and badabing
 
+        binding.pry
+        right_row = remove_row_or_col_invalids(right_row)
+        left_row = remove_row_or_col_invalids(left_row)
+        
+        binding.pry
 
-        # Take the possible moves and split them into two arrays, Arrays with the same Rank and Arrays with the same file (later add diagonals)
-        # For the Rank array, check the board for each spot that exists in that array
-            # If all are nil, return that array
-            
-            # If any is full, split the array at that point and return ONLY the closer array (even if nil)
-        # 
     end
     private
 
@@ -125,6 +128,22 @@ class Piece
 
         second_half
     end
+
+    def remove_row_or_col_invalids(arr)
+        out = []
+
+        arr.each do |move|
+            out << move
+            break unless @board.grid[move[0]][move[1]].nil?
+        end
+
+        out
+    end
+
+    def remove_diag_invalids(arr)
+        
+
+
 end
 
 
