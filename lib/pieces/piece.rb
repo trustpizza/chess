@@ -20,16 +20,25 @@ class Piece
         moves.compact.flatten(1)   
     end
 
-    def invalid_moves(possible_moves, board)
+    def valid_moves(possible_moves, board)
         row = row(possible_moves)
         col = col(possible_moves) 
+        left_diag = left_diag(possible_moves)
+        right_diag = right_diag(possible_moves)
 
-        right_row = right_row(row)
-        left_row = left_row(row)
+        right_row = second_half(row)
+        left_row = first_half(row)
+        
+        down_col = first_half(col)
+        up_col = second_half(col)
 
-        up_col = up_col(col)
-        down_col = down_col(col)
-        binding.pry
+        #These methods create their respective groupings of moves.  Be sure to uniq! the final product to get rid of any duplicates since they do technically include non diagonal movements ;)
+        upper_left_diag = first_half(left_diag)
+        lower_left_diag = second_half(left_diag)
+
+        upper_right_diag = first_half(right_diag)
+        lower_left_diag = second_half(left_diag)
+
 
         # Take the possible moves and split them into two arrays, Arrays with the same Rank and Arrays with the same file (later add diagonals)
         # For the Rank array, check the board for each spot that exists in that array
@@ -62,60 +71,59 @@ class Piece
     def row(possible_moves)
         out = []
 
-        possible_moves.each do |move|
-            out << move if move[0] == location[0]
-        end
+        possible_moves.each { |move| out << move if move[0] == location[0] }
+        
         out
-    end
-
-    def left_row(row)
-        row << location
-        row = row.uniq.sort
-            
-        left_row = row[0..row.index(location)] 
-        left_row.pop
-
-        left_row
-    end
-
-    def right_row(row)
-        row << location
-        row = row.uniq.sort
-
-        right_row = row[row.index(location)..]
-
-        right_row.shift
-        right_row
     end
 
     def col(possible_moves)
         out = []
+        
+        possible_moves.each { |move| out << move if move[1] == location[1] }
 
-        possible_moves.each do |move|
-            out << move if move[1] == location[1]
-        end
-    
         out
     end
 
-    def up_col(col)
-        col << location
-        col = col.uniq.sort
 
-        up_col = col[..col.index(location)]
+    def left_diag(possible_moves) # The Starting High in the Left going Lower to the right diagonal
+        out = []
+        
+        possible_moves.each { |move| out << move if move[1] < location[1] }
 
-        up_col.pop
-        up_col
+        out
     end
 
-    def down_col(col)
-        col << location
-        col = col.uniq.sort
+    def right_diag(possible_moves)
+        out = []
 
-        down_col = col[col.index(location)..]
+        possible_moves.each { |move| out << move if move[1] > location[1] }
 
-        down_col.shift
-        down_col
+        out
+    end
+
+    def first_half(arr)
+        return if arr.empty?
+
+        arr << location
+        arr = arr.uniq.sort
+
+        first_half = arr[0..arr.index(location)]
+        first_half.pop
+
+        first_half
+    end
+
+    def second_half(arr)
+        return if arr.empty?
+
+        arr << location
+        arr = arr.uniq.sort
+
+        second_half = arr[arr.index(location)..]
+        
+        second_half.shift
+
+        second_half
     end
 end
 
