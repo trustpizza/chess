@@ -26,43 +26,36 @@ class Piece
         left_diag = left_diag(possible_moves)
         right_diag = right_diag(possible_moves)
 
-        right_row = second_half(row)
-        left_row = first_half(row).reverse
+        right_row = remove_invalids(second_half(row))
+        left_row = remove_invalids(first_half(row).reverse)
         
-        up_col = first_half(col).reverse
-        down_col = second_half(col)
+        up_col = remove_invalids(first_half(col).reverse)
+        down_col = remove_invalids(second_half(col))
 
         #These methods create their respective groupings of moves.  Be sure to uniq! the final product to get rid of any duplicates since they do technically include non diagonal movements ;)
-        upper_left_diag = first_half(left_diag)
-        lower_left_diag = second_half(left_diag)
+        upper_left_diag = remove_invalids(first_half(left_diag).reverse)
+        lower_left_diag = remove_invalids(second_half(left_diag))
 
-        upper_right_diag = first_half(right_diag)
-        lower_left_diag = second_half(left_diag)
+        upper_right_diag = remove_invalids(first_half(right_diag).reverse)
+        lower_right_diag = remove_invalids(second_half(right_diag))
         
-        #Now that I have every combination of possible movements, I can search them and splice them again at the place where they meet their first non-nil place.
-        #Then take all of those and return them into a single array
-        # Collapse all of those and badabing
-
-        binding.pry
-        right_row = remove_row_or_col_invalids(right_row)
-        left_row = remove_row_or_col_invalids(left_row)
-        
-        binding.pry
-
+        valid_moves = right_row + left_row + up_col + down_col + upper_left_diag + lower_left_diag + upper_right_diag + lower_right_diag
+        valid_moves.uniq
     end
-    private
 
+    private
 
     def make_moves(grid, rank_delta, file_delta)
         rank = location[0] + rank_delta
         file = location[1] + file_delta
         out = []
         while valid_location?(rank, file)
-            break if grid[rank][file]
+            #break if grid[rank][file] # This cuts out all moves in inhabited places and needs to be refactored!
 
             out << [rank,file]
             rank += rank_delta
             file += file_delta
+
         end
         out
     end
@@ -105,8 +98,6 @@ class Piece
     end
 
     def first_half(arr)
-        return if arr.empty?
-
         arr << location
         arr = arr.uniq.sort
 
@@ -117,7 +108,6 @@ class Piece
     end
 
     def second_half(arr)
-        return if arr.empty?
 
         arr << location
         arr = arr.uniq.sort
@@ -129,7 +119,9 @@ class Piece
         second_half
     end
 
-    def remove_row_or_col_invalids(arr)
+    def remove_invalids(arr)
+        return arr if arr.empty?
+
         out = []
 
         arr.each do |move|
@@ -139,11 +131,4 @@ class Piece
 
         out
     end
-
-    def remove_diag_invalids(arr)
-        
-
-
 end
-
-
