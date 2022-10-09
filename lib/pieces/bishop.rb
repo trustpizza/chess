@@ -1,4 +1,5 @@
 require_relative "piece.rb"
+require_relative "../board.rb"
 
 
 class Bishop < Piece
@@ -12,5 +13,3 @@ class Bishop < Piece
         [[1,1],[-1,-1],[-1,1],[1,-1]]
     end
 end
-
-
