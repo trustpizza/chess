@@ -1,25 +1,16 @@
-class Bishop 
-    attr_accessor :children, :parent, :location
+require_relative "piece.rb"
+require_relative "../board.rb"
 
-    def initialize(location, parent = nil)
-        @location = location
-        @children = []
-        @parent = parent
+
+class Bishop < Piece
+    attr_accessor :location
+
+    def initialize(location, board, color)
+        super(location, board, color)
     end
 
-    def set_location(location)
-        @location = location
-    end
-
-    def next_moves(out = [])
-        moves = [[1,1],[-1,-1],[-1,1],[1,-1]]
-
-        moves.map do |move|
-        x = @location[0] + move[0]
-        y = @location[1] + move[1]
-
-        out << [x, y] if x.between?(0, 7) && y.between?(0, 7)
-        end
-        out
+    def move_set
+        [[1,1],[-1,-1],[-1,1],[1,-1]]
     end
 end
+
