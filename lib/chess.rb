@@ -18,14 +18,14 @@ class Chess
         new_game
     end
 
+    private 
+    
     def new_game
         @pieces = new_white_pieces + new_black_pieces
 
         @board.update_board(pieces)
         binding.pry
     end
-
-    private
 
     def new_white_pieces
         out = []
