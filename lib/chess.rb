@@ -19,7 +19,7 @@ class Chess
     end
 
     private 
-    
+
     def new_game
         @pieces = new_white_pieces + new_black_pieces
 
@@ -63,8 +63,8 @@ class Chess
         bishop1 = Bishop.new([7,2], board, 'black')
         bishop2 = Bishop.new([7,5], board, 'black')
 
-        queen = Queen.new([7,3], board, 'black')
-        king = King.new([7,4], board, 'black')
+        queen = Queen.new([7,4], board, 'black')
+        king = King.new([7,3], board, 'black')
         
         out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, king]
     end
