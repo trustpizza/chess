@@ -5,11 +5,12 @@ require_relative "../board.rb"
 class Bishop < Piece
     attr_accessor :location
 
-    def initialize(location, board)
-        super(location, board)
+    def initialize(location, board, color)
+        super(location, board, color)
     end
 
     def move_set
         [[1,1],[-1,-1],[-1,1],[1,-1]]
     end
 end
+

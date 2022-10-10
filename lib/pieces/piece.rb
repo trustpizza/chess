@@ -1,12 +1,14 @@
 require_relative "../board.rb"
 
 class Piece 
-    attr_reader :location, :rank, :file
+    attr_reader :location, :color
     
-    def initialize(location, board)
+    def initialize(location, board, color)
         @location = location
 
         @board = board
+
+        @color = color
     end
 
     def update_location(rank, file)
@@ -40,7 +42,9 @@ class Piece
         lower_right_diag = remove_invalids(second_half(right_diag))
         
         valid_moves = right_row + left_row + up_col + down_col + upper_left_diag + lower_left_diag + upper_right_diag + lower_right_diag
-        valid_moves.uniq
+        valid_moves.uniq! # All moves INCLUDING same-colored pieces
+
+        remove_same_colors(valid_moves, board)
     end
 
     private
@@ -130,5 +134,16 @@ class Piece
         end
 
         out
+    end
+
+    def remove_same_colors(moves, board)
+        moves.each do |move|
+            unless @board.grid[move[0]][move[1]].nil?
+                #binding.pry
+                if @board.grid[move[0]][move[1]].color == self.color 
+                    moves.delete(move)
+                end
+            end
+        end
     end
 end
