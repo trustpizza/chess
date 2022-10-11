@@ -2,8 +2,7 @@ require_relative "piece.rb"
 require_relative "../board.rb"
 
 class Knight < Piece
-  attr_accessor :location
-
+  
   def initialize(location, board, color)
     super(location, board, color)
   end

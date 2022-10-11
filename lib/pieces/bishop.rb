@@ -3,8 +3,7 @@ require_relative "../board.rb"
 
 
 class Bishop < Piece
-    attr_accessor :location
-
+ 
     def initialize(location, board, color)
         super(location, board, color)
     end

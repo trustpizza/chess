@@ -1,11 +1,11 @@
-#require_relative "pieces/rook.rb"
 require "pry-byebug"
 
 class Board 
-  attr_accessor :grid
+  attr_accessor :grid, :pieces
 
   def initialize(grid = Array.new(8) { Array.new(8) })
     @grid = grid
+    @pieces = nil
   end
   #I should add rules to the game here! (Checkmate, turn-based, etc.)
   def update_board(pieces)

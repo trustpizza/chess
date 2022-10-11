@@ -18,13 +18,16 @@ class Chess
         new_game
     end
 
+    def send_pieces
+        @board.pieces = @pieces
+    end
+
     private 
 
     def new_game
-        @pieces = new_white_pieces + new_black_pieces
+        @pieces = new_white_pieces() + new_black_pieces()
 
         @board.update_board(pieces)
-        binding.pry
     end
 
     def new_white_pieces
@@ -43,16 +46,17 @@ class Chess
         bishop2 = Bishop.new([0,5], board, 'white')
 
         queen = Queen.new([0,3], board, 'white')
-        king = King.new([0,4], board, 'white')
+        white_king = King.new([0,4], board, 'white')
         
-        out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, king]
+        out << bishop1
+        #out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, white_king]
     end
 
     def new_black_pieces
         out = []
         for i in 0..7
             pawn = Pawn.new([6, i], board, 'black')
-            out << pawn
+            #out << pawn
         end
         rook1 = Rook.new([7,0], board, 'black')
         rook2 = Rook.new([7,7], board, 'black')
@@ -64,9 +68,14 @@ class Chess
         bishop2 = Bishop.new([7,5], board, 'black')
 
         queen = Queen.new([7,4], board, 'black')
-        king = King.new([7,3], board, 'black')
+        black_king = King.new([7,3], board, 'black')
         
-        out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, king]
+        out += []#[rook1]#, rook2, knight1, knight2, bishop1, bishop2, queen, black_king]
     end
 end
-Chess.new
+chess = Chess.new
+out = []
+
+chess.pieces.each { |piece| out << piece.valid_moves(piece.possible_moves(chess.board), chess.board) }
+binding.pry
+x
