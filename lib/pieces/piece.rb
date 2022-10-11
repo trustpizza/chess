@@ -47,7 +47,7 @@ class Piece
         
         valid_moves = right_row + left_row + up_col + down_col + upper_left_diag + lower_left_diag + upper_right_diag + lower_right_diag
         valid_moves.uniq! # All moves INCLUDING same-colored pieces
-
+        
         remove_same_colors(valid_moves, board)
     end
 
@@ -142,8 +142,11 @@ class Piece
 
     def remove_same_colors(moves, board)
         moves.each do |move|
-            unless @board.grid[move[0]][move[1]].nil?
-                if @board.grid[move[0]][move[1]].color == self.color 
+            puts move
+            unless board.grid[move[0]][move[1]].nil?
+                if board.grid[move[0]][move[1]].color == self.color 
+                    binding.pry
+                    
                     moves.delete(move)
                 end
             end

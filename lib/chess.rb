@@ -25,7 +25,7 @@ class Chess
     private 
 
     def new_game
-        @pieces = new_white_pieces() + new_black_pieces()
+        @pieces = new_white_pieces# + new_black_pieces
 
         @board.update_board(pieces)
     end
@@ -55,7 +55,7 @@ class Chess
         out = []
         for i in 0..7
             pawn = Pawn.new([6, i], board, 'black')
-            #out << pawn
+            out << pawn
         end
         rook1 = Rook.new([7,0], board, 'black')
         rook2 = Rook.new([7,7], board, 'black')
@@ -72,9 +72,3 @@ class Chess
         out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, black_king]
     end
 end
-chess = Chess.new
-out = []
-
-chess.pieces.each { |piece| out << piece.valid_moves(piece.possible_moves(chess.board), chess.board) }
-binding.pry
-x
