@@ -48,8 +48,7 @@ class Chess
         queen = Queen.new([0,3], board, 'white')
         white_king = King.new([0,4], board, 'white')
         
-        out << bishop1
-        #out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, white_king]
+        out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, white_king]
     end
 
     def new_black_pieces
@@ -70,7 +69,7 @@ class Chess
         queen = Queen.new([7,4], board, 'black')
         black_king = King.new([7,3], board, 'black')
         
-        out += []#[rook1]#, rook2, knight1, knight2, bishop1, bishop2, queen, black_king]
+        out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, black_king]
     end
 end
 chess = Chess.new
