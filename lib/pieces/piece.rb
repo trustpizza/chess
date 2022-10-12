@@ -142,10 +142,8 @@ class Piece
 
     def remove_same_colors(moves, board)
         moves.reject do |move|
-            unless board.grid[move[0]][move[1]].nil?
-                move if board.grid[move[0]][move[1]].color == self.color
-            end
-
+            pc = board.grid[move[0]][move[1]]
+            pc && pc.color == self.color
         end
     end
 end
