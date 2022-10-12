@@ -141,6 +141,7 @@ class Piece
     end
 
     def remove_same_colors(moves, board)
+        moves.compact!
         moves.reject do |move|
             pc = board.grid[move[0]][move[1]]
             pc && pc.color == self.color

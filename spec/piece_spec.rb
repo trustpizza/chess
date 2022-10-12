@@ -68,6 +68,38 @@ describe Piece do
 
                 expect(bishop.valid_moves(bishop.possible_moves(board), board)).to eql([[1,1]])
             end
+
+            it "Pawns can move 2 spaces on their first move" do 
+                board = Board.new
+                pawn = Pawn.new([1,1], board, 'white')
+                board.grid[1][1] = pawn
+
+                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([[2,1], [3,1]])
+            end
+
+            it "Pawn can move only 1 place on their second move" do 
+                board = Board.new
+                pawn = Pawn.new([2,2], board, 'white')
+                board.grid[2][2] = pawn
+
+                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([[3,2]])
+            end
+
+            it "Black pawn moves 2 spaces on first move" do
+                board = Board.new
+                pawn = Pawn.new([6,0], board, 'black')
+                board.grid[6][0] = pawn
+
+                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([[5,0], [4,0]])
+            end
+
+            it "Black pawn moves 1 space on second move" do 
+                board = Board.new
+                pawn = Pawn.new([5,0], board, 'black')
+                board.grid[5][0] = pawn
+
+                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([[4,0]])
+            end
         end
 
         context "Blocking each piece" do 
@@ -77,7 +109,7 @@ describe Piece do
                 board.grid[1][0] = rook
 
                 pawn = Pawn.new([0,0], board, 'white')
-
+                
                 expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([])
             end
 

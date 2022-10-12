@@ -9,7 +9,7 @@ require_relative "../lib/pieces/pawn.rb"
 require_relative "../lib/chess.rb"
 
 describe Chess do
-    describe "#INitialize" do
+    describe "#Initialize" do
         context "All possible moves are only Knight and Pawn moves" do
             it "New Game Movements" do
                 chess = Chess.new
