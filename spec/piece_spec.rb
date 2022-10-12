@@ -7,8 +7,6 @@ require_relative "../lib/pieces/king.rb"
 require_relative "../lib/pieces/knight.rb"
 require_relative "../lib/pieces/pawn.rb"
 
-
-
 require "pry-byebug"
 
 describe Piece do

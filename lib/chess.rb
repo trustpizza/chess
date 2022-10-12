@@ -25,7 +25,7 @@ class Chess
     private 
 
     def new_game
-        @pieces = new_white_pieces# + new_black_pieces
+        @pieces = new_white_pieces + new_black_pieces
 
         @board.update_board(pieces)
     end
