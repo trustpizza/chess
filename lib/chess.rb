@@ -10,7 +10,7 @@ require_relative "board.rb"
 
 require "pry-byebug"
 class Chess
-    attr_reader :board, :pieces
+    attr_reader :board, :pieces, :white_king, :black_king
 
     def initialize
         @board = Board.new
@@ -22,6 +22,20 @@ class Chess
         @board.pieces = @pieces
     end
 
+    def all_available_moves
+        out = []
+
+        @pieces.each { |piece| out << piece.valid_moves(piece.possible_moves(board), board) }
+        out.compact.flatten(1).sort
+    end
+
+    def in_check?(moves, king)
+        moves.any? { |move| move == king.location }
+    end
+
+    def in_checkmate?(moves, king)
+        #Search each of the king's possible moves for if it results in a checkmate!
+    end
     private 
 
     def new_game
@@ -46,9 +60,9 @@ class Chess
         bishop2 = Bishop.new([0,5], board, 'white')
 
         queen = Queen.new([0,3], board, 'white')
-        white_king = King.new([0,4], board, 'white')
+        @white_king = King.new([0,4], board, 'white')
         
-        out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, white_king]
+        out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, @white_king]
     end
 
     def new_black_pieces
@@ -67,8 +81,13 @@ class Chess
         bishop2 = Bishop.new([7,5], board, 'black')
 
         queen = Queen.new([7,4], board, 'black')
-        black_king = King.new([7,3], board, 'black')
+        @black_king = King.new([7,3], board, 'black')
         
-        out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, black_king]
+        out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, @black_king]
     end
 end
+
+x = Chess.new
+x.in_check?(x.all_available_moves, x.white_king)
+binding.pry
+x

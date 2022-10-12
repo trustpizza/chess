@@ -17,4 +17,5 @@ class Board
   def update_location(piece, coords)
     @grid[coords[0]][coords[1]] = piece
   end
+
 end
