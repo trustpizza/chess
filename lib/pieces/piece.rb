@@ -141,12 +141,11 @@ class Piece
     end
 
     def remove_same_colors(moves, board)
-        moves.reverse_each do |move|
+        moves.reject do |move|
             unless board.grid[move[0]][move[1]].nil?
-                if board.grid[move[0]][move[1]].color == self.color 
-                    moves.delete(move)
-                end
+                move if board.grid[move[0]][move[1]].color == self.color
             end
+
         end
     end
 end
