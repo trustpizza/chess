@@ -24,7 +24,7 @@ class Board
 
   def all_available_moves
     out = []
-    
+
     @pieces.each { |piece| out << piece.valid_moves(piece.possible_moves) }
     out.compact.flatten(1).sort
   end 
@@ -33,9 +33,7 @@ class Board
     all_available_moves.any? { |move| move == king_location }
   end
 
-  def in_checkmate?(king_possible_locations)
-    true if king_possible_locations.all? { |km| check?(km) }
-    false
+  def in_checkmate?(king)
+    (king.valid_moves(king.possible_moves).empty? || king.valid_moves(king.possible_moves).all? { |km| check?(km) } ) && check?(king.location)
   end
-
 end
