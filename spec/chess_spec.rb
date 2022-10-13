@@ -23,13 +23,16 @@ describe Chess do
         context "No Checkmates" do 
             it "New Game" do
                 chess = Chess.new
+
+                chess.pieces.sample.board.update_pieces(chess.pieces)
                 
-                expect(chess.pieces.sample.board.in_checkmate?(chess.white_king.valid_moves(chess.white_king.possible_moves))).to be(false)
+                expect(chess.pieces.sample.board.in_checkmate?(chess.white_king)).to be(false)
             end
             it "New game with black piece" do
                 chess = Chess.new
-
-                expect(chess.pieces.sample.board.in_checkmate?(chess.black_king.valid_moves(chess.black_king.possible_moves))).to be(false)
+                chess.pieces.sample.board.update_pieces(chess.pieces)
+                
+                expect(chess.pieces.sample.board.in_checkmate?(chess.black_king)).to be(false)
             end
         end
 
@@ -43,10 +46,25 @@ describe Chess do
 
                 pieces = rook.board.grid.flatten.compact
 
-                chess.pieces.sample.board.update_pieces(pieces)
+                chess.pieces.sample.board.update_pieces(pieces) # Need to update the board associated with the pieces
                 chess.update_pieces(pieces)
 
                 expect(chess.pieces.sample.board.check?(chess.white_king.location)).to be(true)
+            end
+
+            it "Not in checkmate" do 
+                chess = Chess.new
+                
+                rook = Rook.new([1,3], 'black')
+
+                chess.pieces.sample.board.grid[1][3] = rook
+
+                pieces = rook.board.grid.flatten.compact
+
+                chess.pieces.sample.board.update_pieces(pieces)
+                chess.update_pieces(pieces)
+
+                expect(chess.pieces.sample.board.check?(chess.white_king.valid_moves(chess.white_king.possible_moves))).to be(false)
             end
         end
     end
