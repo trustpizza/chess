@@ -2,12 +2,10 @@ require_relative "../board.rb"
 
 class Piece 
     attr_reader :color
+    @@board = Board.new
 
-    def initialize(location, board, color)
+    def initialize(location, color)
         @location = location
-
-        @board = board
-
         @color = color
     end
 
@@ -19,14 +17,14 @@ class Piece
         @location = [rank, file]
     end
 
-    def possible_moves(board)
+    def possible_moves
         moves = move_set.reduce([]) do |out, move|
-            out << make_moves(board.grid, move[0], move[1]) #Function that takes the board, takes move[0] and move[1] to determine available moves
+            out << make_moves(move[0], move[1]) #Function that takes the board, takes move[0] and move[1] to determine available moves
         end
         moves.compact.flatten(1)   
     end
 
-    def valid_moves(possible_moves, board)
+    def valid_moves(possible_moves)
         row = row(possible_moves)
         col = col(possible_moves) 
         left_diag = left_diag(possible_moves)
@@ -48,12 +46,12 @@ class Piece
         valid_moves = right_row + left_row + up_col + down_col + upper_left_diag + lower_left_diag + upper_right_diag + lower_right_diag
         valid_moves.uniq! # All moves INCLUDING same-colored pieces
         
-        remove_same_colors(valid_moves, board)
+        remove_same_colors(valid_moves)
     end
 
     private
 
-    def make_moves(grid, rank_delta, file_delta)
+    def make_moves(rank_delta, file_delta)
         rank = location[0] + rank_delta
         file = location[1] + file_delta
         out = []
@@ -134,16 +132,16 @@ class Piece
 
         arr.each do |move|
             out << move
-            break unless @board.grid[move[0]][move[1]].nil?
+            break unless @@board.grid[move[0]][move[1]].nil?
         end
 
         out
     end
 
-    def remove_same_colors(moves, board)
+    def remove_same_colors(moves)
         moves.compact!
         moves.reject do |move|
-            pc = board.grid[move[0]][move[1]]
+            pc = @@board.grid[move[0]][move[1]]
             pc && pc.color == self.color
         end
     end

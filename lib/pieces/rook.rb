@@ -4,8 +4,8 @@ require_relative "../board.rb"
 
 class Rook < Piece
    
-    def initialize(location, board, color)
-        super(location, board, color)
+    def initialize(location, color)
+        super(location, color)
     end
 
     def move_set
