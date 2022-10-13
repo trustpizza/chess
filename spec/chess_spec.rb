@@ -13,7 +13,7 @@ describe Chess do
         context "New Game Movements" do
             it "All possible moves are only Knight and Pawn moves" do
                 chess = Chess.new
-                            
+                        
                 expect(chess.all_available_moves).to eql([[2, 0],[2, 0],[2, 1], [2, 2],[2, 2],[2, 3],[2, 4],[2, 5],[2, 5],[2, 6],[2, 7],[2, 7],[3, 0],[3, 1],[3, 2],[3, 3],[3, 4],[3, 5],[3, 6],[3, 7],[4, 0],[4, 1],[4, 2],[4, 3],[4, 4],[4, 5],[4, 6],[4, 7],[5, 0],[5, 0],[5, 1],[5, 2],[5, 2],[5, 3],[5, 4],[5, 5],[5, 5],[5, 6],[5, 7],[5, 7]])
             end 
         end
@@ -24,24 +24,29 @@ describe Chess do
             it "New Game" do
                 chess = Chess.new
                 
-                expect(chess.in_checkmate?(chess.white_king)).to be(false)
+                expect(chess.pieces.sample.board.in_checkmate?(chess.white_king.valid_moves(chess.white_king.possible_moves))).to be(false)
             end
             it "New game with black piece" do
                 chess = Chess.new
 
-                expect(chess.in_checkmate?(chess.black_king)).to be(false)
+                expect(chess.pieces.sample.board.in_checkmate?(chess.black_king.valid_moves(chess.black_king.possible_moves))).to be(false)
             end
         end
 
         context "In Check but NOT checkmate" do
             it "In check" do
                 chess = Chess.new
-                rook = Rook.new([1,3], chess.board, 'black')
+                
+                rook = Rook.new([1,3], 'black')
 
-                chess.board.grid[1][3] = rook
-                binding.pry
+                chess.pieces.sample.board.grid[1][3] = rook
 
-                expect(chess.in_check?(chess.white_king)).to be(true)
+                pieces = rook.board.grid.flatten.compact
+
+                chess.pieces.sample.board.update_pieces(pieces)
+                chess.update_pieces(pieces)
+
+                expect(chess.pieces.sample.board.check?(chess.white_king.location)).to be(true)
             end
         end
     end
