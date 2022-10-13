@@ -1,7 +1,9 @@
 require_relative "../board.rb"
 
 class Piece 
+    attr_accessor :board
     attr_reader :color
+
     @@board = Board.new
 
     def initialize(location, color)
@@ -11,6 +13,10 @@ class Piece
 
     def location
         @location
+    end
+
+    def board
+        @@board
     end
     
     def update_location(rank, file)
