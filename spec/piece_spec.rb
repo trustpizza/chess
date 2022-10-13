@@ -19,7 +19,6 @@ describe Piece do
             end
 
             it "Locations are the 2nd row and 3rd column" do
-                board = Board.new
                 rook = Rook.new([2,3], 'white')
 
                 expect(rook.possible_moves).to eql([[2, 4], [2, 5], [2, 6], [2, 7], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [1, 3], [0, 3], [2, 2], [2, 1], [2, 0]])
@@ -27,101 +26,92 @@ describe Piece do
         end
 
         context "Empty Board Bishop Locations" do
-            xit "Locations are the down-left diagonal" do
-                board = Board.new
-                bishop = Bishop.new([0,0], board, 'white')
+            it "Locations are the down-left diagonal" do
+                bishop = Bishop.new([0,0], 'white')
 
-                expect(bishop.possible_moves(board)).to eql([[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7]])
+                expect(bishop.possible_moves).to eql([[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7]])
             end
         end
     end
 
     describe "#legal moves" do 
         context "Board with a piece in the way" do
-            xit "Locations are only the top row due to a blockage" do 
-                board = Board.new
-                bishop = Bishop.new([1,0], board, 'white')
-                board.grid[1][0] = bishop
+            it "Locations are only the top row due to a blockage" do 
+                bishop = Bishop.new([1,0], 'white')
 
-                rook = Rook.new([0,0], board, 'black')
+                bishop.board.grid[1][0] = bishop
 
-                expect(rook.valid_moves(rook.possible_moves(board), board)).to eql([[0,1],[0,2], [0,3], [0,4], [0,5], [0,6], [0,7], [1,0]])
+                rook = Rook.new([0,0], 'black')
+
+                expect(rook.valid_moves(rook.possible_moves)).to eql([[0,1],[0,2], [0,3], [0,4], [0,5], [0,6], [0,7], [1,0]])
             end
 
-            xit "locations are only the left top and bottom rows, as well as the bishop piece" do
-                board = Board.new
-                bishop = Bishop.new([4,4], board, 'white')
-                board.grid[4][4] = bishop
+            it "locations are only the left top and bottom rows, as well as the bishop piece" do
+                bishop = Bishop.new([4,4], 'white')
+                bishop.board.grid[4][4] = bishop
 
-                rook = Rook.new([4,3], board, 'black')
+                rook = Rook.new([4,3], 'black')
                 
-                expect(rook.valid_moves(rook.possible_moves(board), board)).to eql([[4, 4], [4, 2], [4, 1], [4, 0], [3, 3], [2, 3], [1, 3], [0, 3], [5, 3], [6, 3], [7, 3]])
+                expect(rook.valid_moves(rook.possible_moves)).to eql([[4, 4], [4, 2], [4, 1], [4, 0], [3, 3], [2, 3], [1, 3], [0, 3], [5, 3], [6, 3], [7, 3]])
             end
 
-            xit "The same but for bishops" do
-                board = Board.new
-                rook = Rook.new([1,1], board, "white")
-                board.grid[1][1] = rook
+            it "The same but for bishops" do
+                rook = Rook.new([1,1], "white")
+                rook.board.grid[1][1] = rook
 
-                bishop = Bishop.new([0,0],board, "black")
+                bishop = Bishop.new([0,0], "black")
 
-                expect(bishop.valid_moves(bishop.possible_moves(board), board)).to eql([[1,1]])
+                expect(bishop.valid_moves(bishop.possible_moves)).to eql([[1,1]])
             end
 
-            xit "Pawns can move 2 spaces on their first move" do 
-                board = Board.new
-                pawn = Pawn.new([1,1], board, 'white')
-                board.grid[1][1] = pawn
+            it "Pawns can move 2 spaces on their first move" do 
+                pawn = Pawn.new([1,1], 'white')
+                pawn.board.grid[1][1] = pawn
 
-                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([[2,1], [3,1]])
+                expect(pawn.valid_moves(pawn.possible_moves)).to eql([[2,1], [3,1]])
             end
 
-            xit "Pawn can move only 1 place on their second move" do 
-                board = Board.new
-                pawn = Pawn.new([2,2], board, 'white')
-                board.grid[2][2] = pawn
+            it "Pawn can move only 1 place on their second move" do 
+                pawn = Pawn.new([2,2], 'white')
+                pawn.board.grid[2][2] = pawn
 
-                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([[3,2]])
+                expect(pawn.valid_moves(pawn.possible_moves)).to eql([[3,2]])
             end
 
-            xit "Black pawn moves 2 spaces on first move" do
-                board = Board.new
-                pawn = Pawn.new([6,0], board, 'black')
-                board.grid[6][0] = pawn
+            it "Black pawn moves 2 spaces on first move" do
+                pawn = Pawn.new([6,0], 'black')
+                pawn.board.grid[6][0] = pawn
 
-                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([[5,0], [4,0]])
+                expect(pawn.valid_moves(pawn.possible_moves)).to eql([[5,0], [4,0]])
             end
 
-            xit "Black pawn moves 1 space on second move" do 
-                board = Board.new
-                pawn = Pawn.new([5,0], board, 'black')
-                board.grid[5][0] = pawn
+            it "Black pawn moves 1 space on second move" do 
+                pawn = Pawn.new([5,0], 'black')
+                pawn.board.grid[5][0] = pawn
 
-                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([[4,0]])
+                expect(pawn.valid_moves(pawn.possible_moves)).to eql([[4,0]])
             end
         end
 
         context "Blocking each piece" do 
-            xit "Pawn blocked" do 
-                board = Board.new
-                rook = Rook.new([1,0], board, "white")
-                board.grid[1][0] = rook
+            it "Pawn blocked" do 
+                rook = Rook.new([1,0], "white")
+                rook.board.grid[1][0] = rook
 
-                pawn = Pawn.new([0,0], board, 'white')
+                pawn = Pawn.new([0,0], 'white')
                 
-                expect(pawn.valid_moves(pawn.possible_moves(board), board)).to eql([])
+                expect(pawn.valid_moves(pawn.possible_moves)).to eql([])
             end
 
-            xit "rook blocked" do 
-                board = Board.new
-                rook = Rook.new([1,0], board, "white")
-                bishop = Bishop.new([0,1], board, 'white')
-                board.grid[1][0] = rook
-                board.grid[0][1] = bishop
+            it "rook blocked" do 
+                rook = Rook.new([1,0], "white")
+                bishop = Bishop.new([0,1], 'white')
+                rook.board.grid[1][0] = rook
+                rook.board.grid[0][1] = bishop
 
-                rook1 = Rook.new([0,0], board, 'white')
+                rook1 = Rook.new([0,0], 'white')
                 
-                expect(rook1.valid_moves(rook1.possible_moves(board), board)).to eql([])
+                expect(rook1.valid_moves(rook1.possible_moves)).to eql([])
             end
         end
     end
