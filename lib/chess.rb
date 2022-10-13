@@ -10,7 +10,7 @@ require_relative "board.rb"
 
 require "pry-byebug"
 class Chess
-    attr_reader :board, :pieces, :white_king, :black_king
+    attr_reader  :board, :pieces, :white_king, :black_king
 
     def initialize
         new_game
@@ -26,9 +26,27 @@ class Chess
 
     def all_available_moves
         out = []
-
+        
         @pieces.each { |piece| out << piece.valid_moves(piece.possible_moves) }
         out.compact.flatten(1).sort
+    end
+
+    def select_piece
+        puts "Select a rank"
+        rank = gets.chomp.to_i
+        puts "Select a file"
+        file = gets.chomp.to_i
+
+        @pieces.sample.board.grid[rank][file] 
+    end
+
+    def move_piece(piece, rank, file)
+        original_loc = piece.location
+
+        piece.board.grid[rank][file] = piece
+        piece.update_location(rank, file)
+
+        piece.board.grid[original_loc[0]][original_loc[1]] = nil
     end
 
     private 
