@@ -29,13 +29,17 @@ class Chess
         out.compact.flatten(1).sort
     end
 
-    def in_check?(moves, king)
-        moves.any? { |move| move == king.location }
+    def in_check?(moves, location) #Can later remove this and replace use-case with would_check
+        moves.any? { |move| move == location }
     end
 
-    def in_checkmate?(moves, king)
-        #Search each of the king's possible moves for if it results in a checkmate!
+    def in_checkmate?(moves)
+        #Take all the moves that all pieces have
+        # Take all the moves that a king has
+        # For each of the king's moves see if any of the pieces put it into check
+        # If this is true for ALL moves && current move, then checkmate
     end
+
     private 
 
     def new_game
@@ -85,9 +89,13 @@ class Chess
         
         out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, @black_king]
     end
+
+    def would_check?(moves, location)
+        moves.any? { |move| move == location }
+    end
 end
 
 x = Chess.new
-x.in_check?(x.all_available_moves, x.white_king)
+x.in_check?(x.all_available_moves, x.white_king.location)
 binding.pry
 x
