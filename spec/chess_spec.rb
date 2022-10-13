@@ -19,5 +19,30 @@ describe Chess do
         end
     end
 
-    describe 
+    describe "#Checkmate" do
+        context "No Checkmates" do 
+            it "New Game" do
+                chess = Chess.new
+                
+                expect(chess.in_checkmate?(chess.white_king)).to be(false)
+            end
+            it "New game with black piece" do
+                chess = Chess.new
+
+                expect(chess.in_checkmate?(chess.black_king)).to be(false)
+            end
+        end
+
+        context "In Check but NOT checkmate" do
+            it "In check" do
+                chess = Chess.new
+                rook = Rook.new([1,3], chess.board, 'black')
+
+                chess.board.grid[1][3] = rook
+                binding.pry
+
+                expect(chess.in_check?(chess.white_king)).to be(true)
+            end
+        end
+    end
 end
