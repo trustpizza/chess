@@ -101,5 +101,7 @@ class Chess
 end
 
 chess = Chess.new
-binding.pry
 chess.pieces.sample.board.print_board
+x = chess.pieces.sample
+binding.pry
+x

@@ -42,9 +42,9 @@ class Board
 
   def print_board
     i = 0
-    p "#{piece_or_square1([0,0])} | #{piece_or_square1([0,1])} | #{piece_or_square1([0,2])} | #{piece_or_square1([0,3])} | #{piece_or_square1([0,4])} | #{piece_or_square1([0,5])} | #{piece_or_square1([0,6])} | #{piece_or_square1([0,7])}"
-    p "---+----+----+----+----+----+----+----"
-    p "#{piece_or_square2([1,0])} | #{piece_or_square2([1,1])} | #{piece_or_square2([1,2])} | #{piece_or_square2([1,3])} | #{piece_or_square2([1,4])} | #{piece_or_square2([1,5])} | #{piece_or_square2([1,6])} | #{piece_or_square2([1,7])}"
+    puts "#{piece_or_square1([0,0])} | #{piece_or_square1([0,1])} | #{piece_or_square1([0,2])} | #{piece_or_square1([0,3])} | #{piece_or_square1([0,4])} | #{piece_or_square1([0,5])} | #{piece_or_square1([0,6])} | #{piece_or_square1([0,7])}"
+    puts "---+----+----+----+----+----+----+----"
+    puts "#{piece_or_square2([1,0])} | #{piece_or_square2([1,1])} | #{piece_or_square2([1,2])} | #{piece_or_square2([1,3])} | #{piece_or_square2([1,4])} | #{piece_or_square2([1,5])} | #{piece_or_square2([1,6])} | #{piece_or_square2([1,7])}"
     puts "---+----+----+----+----+----+----+----"
     puts "#{piece_or_square1([2,0])} | #{piece_or_square1([2,1])} | #{piece_or_square1([2,2])} | #{piece_or_square1([2,3])} | #{piece_or_square1([2,4])} | #{piece_or_square1([2,5])} | #{piece_or_square1([2,6])} | #{piece_or_square1([2,7])}"
     puts "---+----+----+----+----+----+----+----"

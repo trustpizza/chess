@@ -25,8 +25,8 @@ class Pawn < Piece
   end
 
   def symbol
-    puts "\u2659" if self.color == 'white'
-    puts "\u265F" if self.color == 'black'
+    return " \u2659" if self.color == 'white'
+    return " \u265F" if self.color == 'black'
   end
 
   private 

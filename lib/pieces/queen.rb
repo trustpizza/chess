@@ -11,7 +11,7 @@ class Queen < Piece
     end
 
     def symbol
-        return "\u2655" if self.color == 'white'
-        return "\u265B" if self.color == 'black'
+        return " \u2655" if self.color == 'white'
+        return " \u265B" if self.color == 'black'
     end
 end

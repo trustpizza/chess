@@ -16,8 +16,8 @@ class Knight < Piece
   end
 
   def symbol
-    return "\u2658" if self.color == 'white'
-    return "\u265E" if self.color == 'black'
+    return " \u2658" if self.color == 'white'
+    return " \u265E" if self.color == 'black'
   end
 
   private 
