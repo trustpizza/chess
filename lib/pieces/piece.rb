@@ -1,6 +1,7 @@
 require_relative "../board.rb"
 
 class Piece 
+<<<<<<< HEAD
     attr_accessor :board, :location
     attr_reader :color
 
@@ -15,18 +16,40 @@ class Piece
         @@board
     end
     
+=======
+    attr_reader :location, :color
+    
+    def initialize(location, board, color)
+        @location = location
+
+        @board = board
+
+        @color = color
+    end
+
+>>>>>>> origin/test
     def update_location(rank, file)
         @location = [rank, file]
     end
 
+<<<<<<< HEAD
     def possible_moves
         moves = move_set.reduce([]) do |out, move|
             out << make_moves(move[0], move[1]) #Function that takes the board, takes move[0] and move[1] to determine available moves
+=======
+    def possible_moves(board)
+        moves = move_set.reduce([]) do |out, move|
+            out << make_moves(board.grid, move[0], move[1]) #Function that takes the board, takes move[0] and move[1] to determine available moves
+>>>>>>> origin/test
         end
         moves.compact.flatten(1)   
     end
 
+<<<<<<< HEAD
     def valid_moves(possible_moves)
+=======
+    def valid_moves(possible_moves, board)
+>>>>>>> origin/test
         row = row(possible_moves)
         col = col(possible_moves) 
         left_diag = left_diag(possible_moves)
@@ -47,13 +70,22 @@ class Piece
         
         valid_moves = right_row + left_row + up_col + down_col + upper_left_diag + lower_left_diag + upper_right_diag + lower_right_diag
         valid_moves.uniq! # All moves INCLUDING same-colored pieces
+<<<<<<< HEAD
         
         remove_same_colors(valid_moves)
+=======
+
+        remove_same_colors(valid_moves, board)
+>>>>>>> origin/test
     end
 
     private
 
+<<<<<<< HEAD
     def make_moves(rank_delta, file_delta)
+=======
+    def make_moves(grid, rank_delta, file_delta)
+>>>>>>> origin/test
         rank = location[0] + rank_delta
         file = location[1] + file_delta
         out = []
@@ -134,17 +166,32 @@ class Piece
 
         arr.each do |move|
             out << move
+<<<<<<< HEAD
             break unless @@board.grid[move[0]][move[1]].nil?
+=======
+            break unless @board.grid[move[0]][move[1]].nil?
+>>>>>>> origin/test
         end
 
         out
     end
 
+<<<<<<< HEAD
     def remove_same_colors(moves)
         moves.compact!
         moves.reject do |move|
             pc = @@board.grid[move[0]][move[1]]
             pc && pc.color == self.color
+=======
+    def remove_same_colors(moves, board)
+        moves.each do |move|
+            unless @board.grid[move[0]][move[1]].nil?
+                #binding.pry
+                if @board.grid[move[0]][move[1]].color == self.color 
+                    moves.delete(move)
+                end
+            end
+>>>>>>> origin/test
         end
     end
 end

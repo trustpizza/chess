@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require_relative "misc/misc.rb"
 require "pry-byebug"
 
@@ -72,5 +73,15 @@ class Board
     
     return white_square if location[1].odd?
     return black_square if location[1].even?
+=======
+#require_relative "pieces/rook.rb"
+require "pry-byebug"
+
+class Board 
+  attr_accessor :grid
+
+  def initialize(grid = Array.new(8) { Array.new(8) })
+    @grid = grid
+>>>>>>> origin/test
   end
 end
