@@ -99,3 +99,7 @@ class Chess
         out += [rook1, rook2, knight1, knight2, bishop1, bishop2, queen, @black_king]
     end
 end
+
+chess = Chess.new
+binding.pry
+chess.pieces.sample.board.print_board

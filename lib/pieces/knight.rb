@@ -15,6 +15,11 @@ class Knight < Piece
       remove_same_colors(possible_moves)   
   end
 
+  def symbol
+    return "\u2658" if self.color == 'white'
+    return "\u265E" if self.color == 'black'
+  end
+
   private 
 
   def make_moves(rank_delta, file_delta)

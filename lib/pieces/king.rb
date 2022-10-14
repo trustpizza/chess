@@ -1,4 +1,5 @@
 require_relative "../board.rb"
+require_relative "piece"
 
 class King < Piece
   attr_accessor :location
@@ -13,6 +14,11 @@ class King < Piece
 
   def valid_moves(possible_moves)
       remove_same_colors(possible_moves)   
+  end
+
+  def symbol
+    return "\u2654" if self.color == 'white'
+    return "\u265A" if self.color == 'black'
   end
 
   private 

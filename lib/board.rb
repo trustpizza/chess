@@ -41,40 +41,36 @@ class Board
   end
 
   def print_board
-    i = 1
-    puts "#{piece_or_square1([i,0])} | #{piece_or_square1([i,1])} | #{piece_or_square1([i,2])} | #{piece_or_square1([i,3])} | #{piece_or_square1([i,4])} | #{piece_or_square1([i,5])} | #{piece_or_square1([i,6])} | #{piece_or_square1([i,7])}"
+    i = 0
+    p "#{piece_or_square1([0,0])} | #{piece_or_square1([0,1])} | #{piece_or_square1([0,2])} | #{piece_or_square1([0,3])} | #{piece_or_square1([0,4])} | #{piece_or_square1([0,5])} | #{piece_or_square1([0,6])} | #{piece_or_square1([0,7])}"
+    p "---+----+----+----+----+----+----+----"
+    p "#{piece_or_square2([1,0])} | #{piece_or_square2([1,1])} | #{piece_or_square2([1,2])} | #{piece_or_square2([1,3])} | #{piece_or_square2([1,4])} | #{piece_or_square2([1,5])} | #{piece_or_square2([1,6])} | #{piece_or_square2([1,7])}"
     puts "---+----+----+----+----+----+----+----"
-    puts "#{piece_or_square2([i,0])} | #{piece_or_square2([i,1])} | #{piece_or_square2([i,2])} | #{piece_or_square2([i,3])} | #{piece_or_square2([i,4])} | #{piece_or_square2([i,5])} | #{piece_or_square2([i,6])} | #{piece_or_square2([i,7])}"
+    puts "#{piece_or_square1([2,0])} | #{piece_or_square1([2,1])} | #{piece_or_square1([2,2])} | #{piece_or_square1([2,3])} | #{piece_or_square1([2,4])} | #{piece_or_square1([2,5])} | #{piece_or_square1([2,6])} | #{piece_or_square1([2,7])}"
     puts "---+----+----+----+----+----+----+----"
-    puts "#{piece_or_square1([i,0])} | #{piece_or_square1([i,1])} | #{piece_or_square1([i,2])} | #{piece_or_square1([i,3])} | #{piece_or_square1([i,4])} | #{piece_or_square1([i,5])} | #{piece_or_square1([i,6])} | #{piece_or_square1([i,7])}"
+    puts "#{piece_or_square2([3,0])} | #{piece_or_square2([3,1])} | #{piece_or_square2([3,2])} | #{piece_or_square2([3,3])} | #{piece_or_square2([3,4])} | #{piece_or_square2([3,5])} | #{piece_or_square2([3,6])} | #{piece_or_square2([3,7])}"
     puts "---+----+----+----+----+----+----+----"
-    puts "#{piece_or_square2([i,0])} | #{piece_or_square2([i,1])} | #{piece_or_square2([i,2])} | #{piece_or_square2([i,3])} | #{piece_or_square2([i,4])} | #{piece_or_square2([i,5])} | #{piece_or_square2([i,6])} | #{piece_or_square2([i,7])}"
+    puts "#{piece_or_square1([4,0])} | #{piece_or_square1([4,1])} | #{piece_or_square1([4,2])} | #{piece_or_square1([4,3])} | #{piece_or_square1([4,4])} | #{piece_or_square1([4,5])} | #{piece_or_square1([4,6])} | #{piece_or_square1([4,7])}"
     puts "---+----+----+----+----+----+----+----"
-    puts "#{piece_or_square1([i,0])} | #{piece_or_square1([i,1])} | #{piece_or_square1([i,2])} | #{piece_or_square1([i,3])} | #{piece_or_square1([i,4])} | #{piece_or_square1([i,5])} | #{piece_or_square1([i,6])} | #{piece_or_square1([i,7])}"
+    puts "#{piece_or_square2([5,0])} | #{piece_or_square2([5,1])} | #{piece_or_square2([5,2])} | #{piece_or_square2([5,3])} | #{piece_or_square2([5,4])} | #{piece_or_square2([5,5])} | #{piece_or_square2([5,6])} | #{piece_or_square2([5,7])}"
     puts "---+----+----+----+----+----+----+----"
-    puts "#{piece_or_square2([i,0])} | #{piece_or_square2([i,1])} | #{piece_or_square2([i,2])} | #{piece_or_square2([i,3])} | #{piece_or_square2([i,4])} | #{piece_or_square2([i,5])} | #{piece_or_square2([i,6])} | #{piece_or_square2([i,7])}"
+    puts "#{piece_or_square1([6,0])} | #{piece_or_square1([6,1])} | #{piece_or_square1([6,2])} | #{piece_or_square1([6,3])} | #{piece_or_square1([6,4])} | #{piece_or_square1([6,5])} | #{piece_or_square1([6,6])} | #{piece_or_square1([6,7])}"
     puts "---+----+----+----+----+----+----+----"
-    puts "#{piece_or_square1([i,0])} | #{piece_or_square1([i,1])} | #{piece_or_square1([i,2])} | #{piece_or_square1([i,3])} | #{piece_or_square1([i,4])} | #{piece_or_square1([i,5])} | #{piece_or_square1([i,6])} | #{piece_or_square1([i,7])}"
-    puts "---+----+----+----+----+----+----+----"
-    puts "#{piece_or_square2([i,0])} | #{piece_or_square2([i,1])} | #{piece_or_square2([i,2])} | #{piece_or_square2([i,3])} | #{piece_or_square2([i,4])} | #{piece_or_square2([i,5])} | #{piece_or_square2([i,6])} | #{piece_or_square2([i,7])}"
+    puts "#{piece_or_square2([7,0])} | #{piece_or_square2([7,1])} | #{piece_or_square2([7,2])} | #{piece_or_square2([7,3])} | #{piece_or_square2([7,4])} | #{piece_or_square2([7,5])} | #{piece_or_square2([7,6])} | #{piece_or_square2([7,7])}"
     puts "---+----+----+----+----+----+----+----"
   end
 
   def piece_or_square1(location)
-    return location unless @grid[location[0]][location[1]].nil?
+    return @grid[location[0]][location[1]].symbol unless @grid[location[0]][location[1]].nil?
     
     return white_square if location[1].even?
     return black_square if location[1].odd?
   end
 
   def piece_or_square2(location)
-    return location unless @grid[location[0]][location[1]].nil?
+    return @grid[location[0]][location[1]].symbol unless @grid[location[0]][location[1]].nil?
     
     return white_square if location[1].odd?
     return black_square if location[1].even?
   end
 end
-
-board = Board.new
-#binding.pry
-board.print_board

@@ -24,6 +24,11 @@ class Pawn < Piece
       remove_same_colors(possible_moves)
   end
 
+  def symbol
+    puts "\u2659" if self.color == 'white'
+    puts "\u265F" if self.color == 'black'
+  end
+
   private 
 
   def make_moves(rank_delta, file_delta)
