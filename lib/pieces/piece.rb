@@ -26,6 +26,11 @@ class Piece
     @moves = remove_invalid_moves(board, possible_moves)
   end
 
+  def current_captures(board)
+    possible_captures = find_possible_captures(board)
+    @captures = remove_invalid_moves(board, possible_captures)
+  end
+
   def find_possible_moves(board)
     moves = move_set.reduce([]) do |out, move|
       out << create_moves(board.grid, move[0], move[1])
@@ -42,11 +47,16 @@ class Piece
     moves.compact
   end
 
-  def remove_illegal_moves(_board, moves)
+  def remove_invalid_moves(board, moves)
     return moves unless moves.size.positive? # empty move_sets are FINE
 
     # Need to make a move validator class
     # First create a better board
+  end
+
+  def update(board)
+    current_captures(board)
+    current_moves(board)
   end
 
   private
