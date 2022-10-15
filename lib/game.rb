@@ -3,7 +3,6 @@ class Chess
   def initialize(number, board = Board.new, current_turn = :white)
     @number = number
     @board = board
-    #binding.pry
 
     @current_turn = current_turn
     play

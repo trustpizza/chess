@@ -2,12 +2,13 @@
 
 require_relative '../board'
 require_relative '../move_validator'
-require 'rubocop'
+
 
 class Piece
   attr_reader :color, :location, :symbol, :moves, :captures, :moved
 
   def initialize(board, args)
+    @@board = board
     @color = args[:color]
     @location = args[:location]
     @symbol = nil # Will be reset at the child class
@@ -82,23 +83,22 @@ class Piece
     rank = @location[0] + rank_change # Applies the
     file = @location[1] + file_change
     while valid_location?(rank, file)
-      break if data[rank, file]
+      break if grid[rank, file]
 
       rank += rank_change
       file += file_change
     end
-
-    [rank, file] if oppossing_piece?(grid, rank, file)
+    [rank, file] if opposing_piece?(rank, file, grid)
   end
 
   def valid_location?(rank, file)
-    rank.between?(0..7) && file.between?(0..7)
+    rank.between?(0,7) && file.between?(0,7)
   end
 
-  def oppossing_piece?(grid, rank, file)
+  def opposing_piece?(rank, file, grid)
     return unless valid_location?(rank, file)
 
-    piece = data[rank][file]
+    piece = grid[rank][file]
     piece && piece.color != color
   end
 end

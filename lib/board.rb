@@ -7,6 +7,7 @@ require_relative 'pieces/rook'
 require_relative 'pieces/bishop'
 require_relative 'pieces/knight'
 require_relative 'pieces/pawn'
+require "pry-byebug"
 
 class Board
   include Printable
@@ -56,8 +57,8 @@ class Board
     init_pawn_row(:black, 1)
     init_row(:white, 7)
     init_pawn_row(:white, 6)
-    @white_king = @data[7][4]
-    @black_king = @data[0][4]
+    @white_king = @grid[7][4]
+    @black_king = @grid[0][4]
 
     update_all
   end
@@ -80,7 +81,7 @@ class Board
   end
 
   def init_row(color, number)
-    @data[number] = [
+    @grid[number] = [
       Rook.new(self, { color: color, location: [number, 0] }),
       Knight.new(self, { color: color, location: [number, 1] }),
       Bishop.new(self, { color: color, location: [number, 2] }),
@@ -93,12 +94,12 @@ class Board
   end
 
   def update_all
-    pieces = @data.flatten(1).compact
+    pieces = @grid.flatten(1).compact
     pieces.each { |piece| piece.update(self) }
   end
 
   def no_moves_or_captures(color)
-    pieces = @data.flatten(1).compact
+    pieces = @grid.flatten(1).compact
     @pieces.none? do |piece|
       next unless piece.color == color
 

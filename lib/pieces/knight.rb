@@ -23,7 +23,7 @@ class Knight < Piece
     move_set.each do |move|
       rank = @location[0] + move[0]
       file = @location[1] + move[1]
-      next unless @board.grid[rank][file]
+      next unless @@board.grid[rank][file]
 
       out << [rank, file] if opposing_piece?(rank, file, board.grid)
     end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'pieces'
+require_relative 'piece'
 
 class Rook < Piece
   def initialize(board, args)

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'pieces'
+require_relative 'piece'
 
 
 class King < Piece
   def initialize(board, args)
     super(board, args)
-    symbol = " \u265A "
+    @symbol = " \u265A "
   end
 
   def find_possible_moves(board)
