@@ -6,6 +6,7 @@ class Board
   def initialize(data = Array.new(8) { Array.new(8) }, hash = {})
     @grid = grid
     @current_piece = hash[:current_piece]
+    @last_piece = hash[:last_piece]
     @black_king = hash[:black_king]
     @white_king = hash[:white_king]
   end
@@ -41,6 +42,24 @@ class Board
     end
   end
 
+  def new_game
+    init_row(:black, 0)
+    init_pawn_row(:black, 1)
+    init_row(:white, 7)
+    init_pawn_row(:white, 6)
+    @white_king = @data[7][4]
+    @black_king = @data[0][4]
+
+    update_all
+  end
+
+  def game_over?
+    return false unless @last_piece
+
+    prior_color = @last_piece.color == :white ? :black : :white
+    no_moves_or_captures(prior_color)
+  end
+  
   private
 
   def init_pawn_row(color, number)
@@ -60,4 +79,17 @@ class Board
     ]
   end
 
+  def update_all
+    pieces = @data.flatten(1).compact
+    pieces.each { |piece| piece.update(self) }
+  end
+
+  def no_moves_or_captures(color)
+    pieces = @data.flatten(1).compact
+    @pieces.none? do |piece|
+      next unless piece.color == color
+
+      piece.moves.size.positive? || piece.captures.size.positive?
+    end
+  end
 end
