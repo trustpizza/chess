@@ -21,6 +21,8 @@ class Chess
 
   def player_turn
     puts "#{@current_turn}'s turn"
+  binding.pry
+
     play_turn
     
     @board.to_s
@@ -45,6 +47,10 @@ class Chess
 
   def user_select_move
     input = user_input(user_move_selection) # ^^^^
+  end
+
+  def translate_to_coords(input)
+    #Turn letter into number, Turn Number into reverse of itself
   end
 
   def switch_color

@@ -12,8 +12,8 @@ require_relative 'move_validator'
 
 def play_game
   two_player = Game.new(2)
-    two_player.setup_board
-    two_player.play
+  two_player.setup_board
+  two_player.play
 end
 
 play_game

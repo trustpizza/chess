@@ -4,12 +4,12 @@ require_relative "piece"
 class Pawn < Piece
   def initiailze(board, args)
     super(board, args)
-    @symbol = "\u265F"
+    @symbol =  " \u265F " #this is not updating for some reason
     @moved = false
   end
 
   def find_possible_moves(board)
-    [move_once(board) + move_twice(board)].compact
+    [move_once(board), move_twice(board)].compact
   end
 
   def find_possible_captures(board)
@@ -39,13 +39,12 @@ class Pawn < Piece
   def move_twice_invalid?(board, move)
     first = move_once(board)
     return true unless first
-
-    @moved || @board.data[move[0]][mov[1]]
+    @moved || @@board.grid[move[0]][move[1]]
   end
 
   def attack(board, file)
-    #binding.pry
     rank = @location[0] + piece_direction
     return [rank, file] if opposing_piece?(rank, file, board.grid)
   end
 end
+

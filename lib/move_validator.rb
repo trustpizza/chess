@@ -14,7 +14,10 @@ class MoveValidator
   def verify_possible_moves
     @king_location = find_king
     @board.grid[@current_location[0]][@current_location[1]] = nil
-    @moves.select { |move| legal_move?(move) }
+    #binding.pry
+    @moves.select do |move| 
+      legal_move?(move) unless move.nil?
+    end
   end
 
   private

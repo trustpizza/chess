@@ -77,7 +77,10 @@ class Board
   private
 
   def init_pawn_row(color, number)
-    8.times { |idx| @grid[number][idx] = Pawn.new(self, { color: color, location: [number, idx]}) }
+    8.times do |idx| 
+      @grid[number][idx] = 
+        Pawn.new(self, { color: color, location: [number, idx] }) 
+    end
   end
 
   def init_row(color, number)

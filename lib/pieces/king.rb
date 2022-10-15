@@ -32,11 +32,11 @@ class King < Piece
     file = @location[1] + file_change
     return unless valid_location?(rank, file)
 
-    [rank, file] if opposing_piece?(rank, file, data)
+    [rank, file] if opposing_piece?(rank, file, grid)
   end
 
   def safe_move?(board, location)
-    pieces = board.data.flatten(1).compact
+    pieces = board.grid.flatten(1).compact
     pieces.none? do |piece|
       next unless piece.color != color && piece.symbol != symbol
 
