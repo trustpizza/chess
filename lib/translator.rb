@@ -7,17 +7,16 @@ class Translator
   end
 
   def translate(letter_num)
-
     coords = letter_num.split('')
     translate_number(coords[1])
     translate_letter(coords[0])
-    { row: @row, col: @col }
+    return { row: @row, col: @col }
   end
 
   private
 
   def translate_letter(letter)
-    letter.downcase.ord - 97
+    @col = letter.downcase.ord - 97
   end
 
   def translate_number(number)

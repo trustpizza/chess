@@ -21,6 +21,10 @@ class Board
     @white_king = hash[:white_king]
   end
 
+  def update(coord)
+    #needs to update the game
+  end
+
   def update_cur_piece(coord)
     @current_piece = @grid[coord[:row]][coord[:col]]
   end

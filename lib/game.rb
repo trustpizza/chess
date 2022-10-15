@@ -26,8 +26,9 @@ class Chess
     puts "#{@current_turn}'s turn"
 
     play_turn
-    
+
     @board.to_s
+    
     switch_color
   end
 
@@ -35,11 +36,15 @@ class Chess
     select_piece
 
     @board.to_s
+    move = user_select_move
+    binding.pry    
+    @board.update_cur_piece(move)
+
+
   end
 
   def select_piece
     input = user_select_piece
-
     coords = translate_to_coords(input)
   end
 
@@ -49,6 +54,7 @@ class Chess
 
   def user_select_move
     input = user_input(user_move_selection) # ^^^^
+    translate_to_coords(input)
   end
 
   def translate_to_coords(input)
