@@ -50,8 +50,9 @@ class Piece
   def remove_invalid_moves(board, moves)
     return moves unless moves.size.positive? # empty move_sets are FINE
 
-    # Need to make a move validator class
-    # First create a better board
+    temp = Marshal.load(Marshal.dump(board))
+    validator = MoveValidator.new(location, temp, moves)
+    validator.verify_possible_moves
   end
 
   def update(board)
