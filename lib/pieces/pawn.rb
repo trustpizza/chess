@@ -1,47 +1,50 @@
-require_relative "../board.rb"
-require "pry-byebug"
+
+require_relative "piece"
 
 class Pawn < Piece
-  
-  def initialize(location, color)
-    super(location, color)
+  def initiailze(board, args)
+    super(board, args)
+    @symbol = "\u265F"
+    @moved = false
   end
 
-  def move_set
-    return [[1,0]] if @color == 'white'
-    return [[-1,0]] if @color == 'black'
+  def find_possible_moves(board)
+    [move_once(board) + move_twice(board)].compact
   end
 
-  def possible_moves
-    moves = move_set.reduce([]) do |out, move|
-        out << make_moves(move[0], move[1]) #Function that takes the board, takes move[0] and move[1] to determine available moves
-    end
-    moves[0] << first_moves
-    moves.compact.flatten(1)
+  def find_possible_captures(board)
+    file = @location[1]
+    [
+      attack(board, file - 1),
+      attack(board, file +1)
+    ]
   end
 
-  def valid_moves(possible_moves)
-      remove_same_colors(possible_moves)
+  def piece_direction
+    color == 'white' ? -1 : 1 #This should only be used on changing the RANK of a piece
   end
 
-  def symbol
-    return " \u2659" if self.color == 'white'
-    return " \u265F" if self.color == 'black'
+  private
+
+  def move_once(board)
+    move = [@location[0] + piece_direction, location[1]]
+    move unless board.grid[move[0]][move[1]]
   end
 
-  private 
-
-  def make_moves(rank_delta, file_delta)
-    rank = location[0] + rank_delta
-    file = location[1] + file_delta
-    out = []
-    out << [rank, file] if valid_location?(rank,file)
-
-    out
+  def move_twice(board)
+    move = [@location[0] + (piece_direction * 2), location[1]]
+    move unless move_twice_invalid?(board, move)
   end
 
-  def first_moves
-    return [3, @location[1]] if (@color == 'white' && @location[0] == 1)
-    return [4, @location[1]] if (@color == 'black' && @location[0] == 6)
+  def move_twice_invalid?(board, move)
+    first = move_once(board)
+    return true unless first
+
+    @moved || @board.data[move[0]][mov[1]]
+  end
+
+  def attack(board, file)
+    rank = @location + piece_direction
+    return [rank, file] if oppossing_piece?(rank, file, board.grid)
   end
 end

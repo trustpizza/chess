@@ -1,17 +1,16 @@
-require_relative "../board.rb"
+# frozen_string_literal: true
+
+require_relative 'pieces'
 
 class Queen < Piece
-   
-    def initialize(location, color)
-        super(location, color)
-    end
+  def initialize(board, args)
+    super(board, args)
+    @symbol = "\u265B"
+  end
 
-    def move_set
-        [[0,1],[1,0],[-1,0],[0,-1], [1,1], [-1,1], [1,-1], [-1, -1]]
-    end
+  private
 
-    def symbol
-        return " \u2655" if self.color == 'white'
-        return " \u265B" if self.color == 'black'
-    end
+  def move_set
+    [[0, 1], [0, -1], [-1, 0], [1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]
+  end
 end

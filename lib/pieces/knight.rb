@@ -1,33 +1,38 @@
-require_relative "piece.rb"
-require_relative "../board.rb"
+require_relative "piece"
 
 class Knight < Piece
-  
-  def initialize(location, color)
-    super(location, color)
+  def initialize(board, args)
+    super(board, args)
+    @symbol = " \u265E "
   end
 
-  def move_set
-    [[1, 2], [2, 1], [-1, -2], [-2, -1], [1, -2], [-1, 2], [2, -1], [-2, 1]]
+  def find_possible_moves(board)
+    out = []
+    move_set.each do |move|
+      rank = @location[0] + move[0]
+      file = @location[1] + move[1]
+      next unless valid_location?(rank, file)
+      
+      out << [rank, file] unless board.grid[rank][file]
+    end
+    out
   end
 
-  def valid_moves(possible_moves)
-      remove_same_colors(possible_moves)   
-  end
+  def find_possible_captures(board)
+    out = []
+    move_set.each do |move|
+      rank = @location[0] + move[0]
+      file = @location[1] + move[1]
+      next unless @board.grid[rank][file]
 
-  def symbol
-    return " \u2658" if self.color == 'white'
-    return " \u265E" if self.color == 'black'
+      out << [rank, file] if opposing_piece?(rank, file, board.grid)
+    end
+    @captures = out
   end
 
   private 
 
-  def make_moves(rank_delta, file_delta)
-    rank = location[0] + rank_delta
-    file = location[1] + file_delta
-    out = []
-    out << [rank, file] if valid_location?(rank,file)
-
-    out
+  def move_set
+    [[-1, -2], [1, 2], [-1, 2], [1, -2], [-2, -1], [2, 1], [-2, 1], [2, -1]]
   end
-end
+end 

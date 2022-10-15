@@ -1,8 +1,9 @@
-require_relative "piece.rb"
-require_relative "../board.rb"
+# frozen_string_literal: true
 
+require_relative 'pieces'
 
 class Rook < Piece
+<<<<<<< HEAD
 <<<<<<< HEAD
    
     def initialize(location, color)
@@ -29,3 +30,16 @@ end
 
 =======
 >>>>>>> origin/test
+=======
+  def initialize(board, args)
+    super(board, args)
+    @symbol = " \u265C "
+  end
+
+  private
+
+  def move_set
+    [[0, 1], [0, -1], [-1, 0], [1, 0]]
+  end
+end
+>>>>>>> origin/chess_2
