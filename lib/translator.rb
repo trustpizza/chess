@@ -1,5 +1,5 @@
 
-class Translator(letter_num)
+class Translator
   
   def initialize
     @row = nil
@@ -7,9 +7,10 @@ class Translator(letter_num)
   end
 
   def translate(letter_num)
+
     coords = letter_num.split('')
     translate_number(coords[1])
-    translate_row(coords[0])
+    translate_letter(coords[0])
     { row: @row, col: @col }
   end
 
