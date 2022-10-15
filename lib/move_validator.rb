@@ -20,7 +20,7 @@ class MoveValidator
   private
 
   def legal_move?(move)
-    captured_piece = @board.gridmove[0]][move[1]]
+    captured_piece = @board.grid[move[0]][move[1]]
     move_current_piece(move)
     king = @king_location || move
     out = safe_king?(king)
@@ -38,8 +38,8 @@ class MoveValidator
     pieces.none? do |piece|
       next unless piece.color != @current_piece.color
 
-      captures = piece.find_possible_captures(board)
-      captures.include?(king_location)
+      captures = piece.find_possible_captures(@board)
+      captures.include?(kings_location)
     end
   end
   

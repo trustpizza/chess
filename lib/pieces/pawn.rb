@@ -44,7 +44,8 @@ class Pawn < Piece
   end
 
   def attack(board, file)
-    rank = @location + piece_direction
-    return [rank, file] if oppossing_piece?(rank, file, board.grid)
+    #binding.pry
+    rank = @location[0] + piece_direction
+    return [rank, file] if opposing_piece?(rank, file, board.grid)
   end
 end
