@@ -18,6 +18,22 @@ class King < Piece
 
   private
 
+  def create_moves(grid, rank_change, file_change)
+    rank = @location[0] + rank_change
+    file = @location[1] + file_change
+    return unless valid_location?(rank, file)
+
+    [rank, file] unless grid[rank][file]
+  end
+
+  def create_captures(grid, rank_change, file_change)
+    rank = @location[0] + rank_change
+    file = @location[1] + file_change
+    return unless valid_location?(rank, file)
+
+    [rank, file] if opposing_piece?(rank, file, data)
+  end
+
   def move_set
     [[0, 1], [0, -1], [-1, 0], [1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]
   end
