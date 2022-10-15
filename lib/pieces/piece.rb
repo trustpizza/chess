@@ -7,7 +7,7 @@ require 'rubocop'
 class Piece
   attr_reader :color, :location, :symbol, :moves, :captures, :moved
 
-  def initialize(_board, args)
+  def initialize(board, args)
     @color = args[:color]
     @location = args[:location]
     @symbol = nil # Will be reset at the child class
@@ -84,7 +84,7 @@ class Piece
     rank.between?(0..7) && file.between?(0..7)
   end
 
-  def oppossing_piece?(_grid, rank, file)
+  def oppossing_piece?(grid, rank, file)
     return unless valid_location?(rank, file)
 
     piece = data[rank][file]
