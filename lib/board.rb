@@ -1,9 +1,18 @@
 # frozen_string_literal: true
+require_relative 'printable'
+require_relative 'pieces/piece'
+require_relative 'pieces/king'
+require_relative 'pieces/queen'
+require_relative 'pieces/rook'
+require_relative 'pieces/bishop'
+require_relative 'pieces/knight'
+require_relative 'pieces/pawn'
 
 class Board
+  include Printable
   attr_accessor :grid, :black_king, :white_king, :current_piece
 
-  def initialize(data = Array.new(8) { Array.new(8) }, hash = {})
+  def initialize(grid = Array.new(8) { Array.new(8) }, hash = {})
     @grid = grid
     @current_piece = hash[:current_piece]
     @last_piece = hash[:last_piece]
@@ -58,6 +67,10 @@ class Board
 
     prior_color = @last_piece.color == :white ? :black : :white
     no_moves_or_captures(prior_color)
+  end
+
+  def to_s
+    print_chess_board
   end
   
   private

@@ -2,6 +2,7 @@
 
 require_relative 'pieces'
 
+
 class King < Piece
   def initialize(board, args)
     super(board, args)
