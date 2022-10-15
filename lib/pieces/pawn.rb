@@ -2,7 +2,7 @@
 require_relative "piece"
 
 class Pawn < Piece
-  def initiailze(board, args)
+  def initialize(board, args)
     super(board, args)
     @symbol =  " \u265F " #this is not updating for some reason
     @moved = false
