@@ -1,4 +1,7 @@
+
+require_relative "translator"
 require "pry-byebug"
+
 class Chess
   def initialize(number, board = Board.new, current_turn = :white)
     @number = number
@@ -21,7 +24,6 @@ class Chess
 
   def player_turn
     puts "#{@current_turn}'s turn"
-  binding.pry
 
     play_turn
     
@@ -50,7 +52,8 @@ class Chess
   end
 
   def translate_to_coords(input)
-    #Turn letter into number, Turn Number into reverse of itself
+    translation = Translator.new
+    translation.translate(input)
   end
 
   def switch_color
