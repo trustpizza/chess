@@ -1,14 +1,16 @@
-require_relative "pieces"
+# frozen_string_literal: true
+
+require_relative 'pieces'
 
 class Bishop < Piece
-    def initialize(board, args)
-      super(board, args)
-      @symbol = " \u265D "
-    end
-  
-    private
-  
-    def move_set
-      [[1, 1], [1, -1], [-1, 1], [-1, -1]]
-    end
+  def initialize(board, args)
+    super(board, args)
+    @symbol = " \u265D "
   end
+
+  private
+
+  def move_set
+    [[1, 1], [1, -1], [-1, 1], [-1, -1]]
+  end
+end
