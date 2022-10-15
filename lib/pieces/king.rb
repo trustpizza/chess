@@ -34,6 +34,16 @@ class King < Piece
     [rank, file] if opposing_piece?(rank, file, data)
   end
 
+  def safe_move?(board, location)
+    pieces = board.data.flatten(1).compact
+    pieces.none? do |piece|
+      next unless piece.color != color && piece.symbol != symbol
+
+      moves = piece.find_possible_moves(board)
+      moves.include?(location)
+    end
+  end
+
   def move_set
     [[0, 1], [0, -1], [-1, 0], [1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]
   end
