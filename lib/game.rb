@@ -36,7 +36,7 @@ class Chess
 
     @board.to_s
     move = user_select_move
-    @board.update(move)
+    @board.update(move) if @board.valid_piece_movement?(move)
   end
 
   def select_piece

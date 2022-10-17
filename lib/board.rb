@@ -116,7 +116,7 @@ class Board
 
   def no_moves_or_captures(color)
     pieces = @grid.flatten(1).compact
-    @pieces.none? do |piece|
+    pieces.none? do |piece|
       next unless piece.color == color
 
       piece.moves.size.positive? || piece.captures.size.positive?
