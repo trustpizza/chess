@@ -8,7 +8,6 @@ class Chess
     @board = board
 
     @current_turn = current_turn
-    play
   end
 
   def setup
@@ -18,7 +17,7 @@ class Chess
   def play
     @board.to_s
 
-    @board.new_game
+    setup
     player_turn until @board.game_over?
   end
 
@@ -37,15 +36,13 @@ class Chess
 
     @board.to_s
     move = user_select_move
-    binding.pry    
-    @board.update_cur_piece(move)
-
-
+    @board.update(move)
   end
 
   def select_piece
     input = user_select_piece
     coords = translate_to_coords(input)
+    @board.update_cur_piece(coords)
   end
 
   def user_select_piece
@@ -81,4 +78,3 @@ class Chess
   end
 end
 
-x = Chess.new(1)

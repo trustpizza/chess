@@ -7,11 +7,13 @@ require_relative 'pieces/rook'
 require_relative 'pieces/bishop'
 require_relative 'pieces/knight'
 require_relative 'pieces/pawn'
+require_relative 'movement'
 require "pry-byebug"
+
 
 class Board
   include Printable
-  attr_accessor :grid, :black_king, :white_king, :current_piece
+  attr_accessor :grid, :black_king, :white_king, :current_piece, :last_piece
 
   def initialize(grid = Array.new(8) { Array.new(8) }, hash = {})
     @grid = grid
@@ -21,8 +23,15 @@ class Board
     @white_king = hash[:white_king]
   end
 
-  def update(coord)
-    #needs to update the game
+  def update(coords)
+    movement = Movement.new
+    movement.update_pieces(self, coords)
+    reset_board_values
+  end
+  
+  def reset_board_values
+    @last_piece = @current_piece
+    @current_piece = nil
   end
 
   def update_cur_piece(coord)
