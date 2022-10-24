@@ -50,7 +50,7 @@ class Piece
 
   def remove_invalid_moves(board, moves)
     return moves unless moves.size.positive? # empty move_sets are FINE
-
+    
     temp = Marshal.load(Marshal.dump(board))
     validator = MoveValidator.new(location, temp, moves)
     validator.verify_possible_moves

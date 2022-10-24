@@ -36,7 +36,10 @@ class Board
   end
 
   def update_cur_piece(coord)
+    binding.pry
     @current_piece = @grid[coord[:row]][coord[:col]]
+    @current_piece.current_captures(self)
+    @current_piece.current_moves(self)
   end
 
   def cur_piece_moveable?
@@ -46,7 +49,7 @@ class Board
   def valid_piece_movement?(coord)
     row = coord[:row]
     col = coord[:col]
-    binding.pry
+    #binding.pry
     
     @current_piece.moves.any?([row, col]) || @current_piece.captures.any?([row, col])
   end

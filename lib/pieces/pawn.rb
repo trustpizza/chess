@@ -14,20 +14,26 @@ class Pawn < Piece
 
   def find_possible_captures(board)
     file = @location[1]
-    [
+    out = [
       attack(board, file - 1),
-      attack(board, file +1)
+      attack(board, file + 1)
     ]
+    out.compact
+  end
+
+  def current_captures(board)
+    @captures = find_possible_captures(board)
   end
 
   def piece_direction
-    color == 'white' ? -1 : 1 #This should only be used on changing the RANK of a piece
+    color == :white ? -1 : 1 #This should only be used on changing the RANK of a piece
   end
 
-  private
+  #private
 
   def move_once(board)
     move = [@location[0] + piece_direction, location[1]]
+
     move unless board.grid[move[0]][move[1]]
   end
 
@@ -44,7 +50,7 @@ class Pawn < Piece
 
   def attack(board, file)
     rank = @location[0] + piece_direction
-    return [rank, file] if opposing_piece?(rank, file, board.grid)
+    return [rank, file] if opposing_piece?(rank, file, board.grid) #Problem!
   end
 end
 
