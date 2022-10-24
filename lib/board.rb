@@ -26,6 +26,7 @@ class Board
   def update(coords)
     movement = Movement.new
     movement.update_pieces(self, coords)
+
     reset_board_values
   end
   
@@ -45,6 +46,7 @@ class Board
   def valid_piece_movement?(coord)
     row = coord[:row]
     col = coord[:col]
+    binding.pry
     
     @current_piece.moves.any?([row, col]) || @current_piece.captures.any?([row, col])
   end

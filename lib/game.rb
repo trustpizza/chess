@@ -15,9 +15,9 @@ class Chess
   end
 
   def play
+    setup
     @board.to_s
 
-    setup
     player_turn until @board.game_over?
   end
 
@@ -42,6 +42,7 @@ class Chess
   def select_piece
     input = user_select_piece
     coords = translate_to_coords(input)
+
     @board.update_cur_piece(coords)
   end
 
