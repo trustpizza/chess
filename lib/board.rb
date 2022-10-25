@@ -36,7 +36,6 @@ class Board
   end
 
   def update_cur_piece(coord)
-    binding.pry
     @current_piece = @grid[coord[:row]][coord[:col]]
     @current_piece.current_captures(self)
     @current_piece.current_moves(self)

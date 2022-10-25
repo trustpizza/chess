@@ -3,7 +3,7 @@ module Printable
 
   # frozen_string_literal: true
 
-# creates visual chess board from board's data array.
+# creates visual chess board from board's grid array.
 # outputs the chess board with letter and number coordinates
 # 36 = cyan colored text
   def print_chess_board
@@ -18,7 +18,7 @@ module Printable
   # interates through each row of board and adds number coordinates
   # 36 = cyan colored text
   def print_board
-    @data.each_with_index do |row, index|
+    @grid.each_with_index do |row, index|
       print "\e[36m #{8 - index} \e[0m"
       print_row(row, index)
       print "\e[36m #{8 - index} \e[0m"
@@ -59,7 +59,7 @@ module Printable
   end
 
   def capture_background?(row, column)
-    @active_piece&.captures&.any?([row, column]) && @data[row][column]
+    @active_piece&.captures&.any?([row, column]) && @grid[row][column]
   end
 
   # determines the font colors each square based on specific conditions
