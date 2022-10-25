@@ -4,11 +4,8 @@ module Printable
   # frozen_string_literal: true
 
 # creates visual chess board from board's data array.
-module Displayable
-  private
-
-  # outputs the chess board with letter and number coordinates
-  # 36 = cyan colored text
+# outputs the chess board with letter and number coordinates
+# 36 = cyan colored text
   def print_chess_board
     system 'clear'
     puts
