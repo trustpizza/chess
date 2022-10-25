@@ -1,32 +1,35 @@
-require "colorize"
-
 module Printable
   private
 
-  def white_square
-    "\u2B1C"
-  end
+  # frozen_string_literal: true
 
-  def black_square
-      "\u2B1B"
-  end
+# creates visual chess board from board's data array.
+module Displayable
+  private
 
+  # outputs the chess board with letter and number coordinates
+  # 36 = cyan colored text
   def print_chess_board
-    system 'clear' 
+    system 'clear'
     puts
+    puts "\e[36m    a  b  c  d  e  f  g  h \e[0m"
     print_board
-    puts "   a   b  c  d  e  f  g  h "
+    puts "\e[36m    a  b  c  d  e  f  g  h \e[0m"
     puts
   end
 
+  # interates through each row of board and adds number coordinates
+  # 36 = cyan colored text
   def print_board
-    @grid.each_with_index do |row, idx|
-      print " #{8-idx} "
-      print_row(row, idx)
+    @data.each_with_index do |row, index|
+      print "\e[36m #{8 - index} \e[0m"
+      print_row(row, index)
+      print "\e[36m #{8 - index} \e[0m"
       puts
     end
   end
-# This is borrows from rlmoser since it looks so pretty
+
+  # creates each row to be printed with different background_color
   def print_row(row, row_index)
     row.each_with_index do |square, index|
       background_color = select_background(row_index, index)
@@ -34,6 +37,16 @@ module Printable
     end
   end
 
+  # returns color of background based on specific conditions
+  # 106 = light cyan background (active piece to move)
+  # 101 = light red background (captures)
+  # 41 = red background (captures)
+  # 46 = cyan background (previous piece that moved)
+  # 47 = light gray background (even)
+  # 104 = light blue background (even)
+  # 100 = dark gray background (even) -> testing it out with black
+  # 100 = dark gray background (odd)
+  # 40 = black background (odd)
   def select_background(row_index, column_index)
     if @active_piece&.location == [row_index, column_index]
       106
@@ -47,7 +60,7 @@ module Printable
       40
     end
   end
-  
+
   def capture_background?(row, column)
     @active_piece&.captures&.any?([row, column]) && @data[row][column]
   end
